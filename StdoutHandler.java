@@ -1,9 +1,9 @@
 public class StdoutHandler implements LogHandler {
-    public void handleLogMessage(LogMessage message) {
-        System.out.println("Level: " + Logger.fromLevelToString(message.level));
-        System.out.println("    Message: " + message.message);
+    public void handleLogMessage(LogMessage logMessage) {
+        System.out.println("Level: " + Logger.fromLevelToString(logMessage.level));
+        System.out.println("    Message: " + logMessage.message);
         System.out.println("    Fields: ");
-        for(LogField field : message.fields) {
+        for(LogField field : logMessage.fields) {
             System.out.println("        " + field.name + ": " + field.value);
         }
     }
