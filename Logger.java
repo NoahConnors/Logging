@@ -81,6 +81,15 @@ public class Logger {
         log(ERROR, message, fieldsArray);
     }
 
+    public Logger newWithExtraFields(LogField... newBaseFieldsArray) {
+        ArrayList<LogField> newBaseFields = new ArrayList<>(Arrays.asList(newBaseFieldsArray));
+        for(int i = 0; i < baseFields.size(); i++) {
+            newBaseFields.add(i, baseFields.get(i));
+        }
+
+        return new Logger(handlers, newBaseFields);
+    }
+
     /**
      * Converts from a log level integer to an appropriate string.
      */
