@@ -87,7 +87,9 @@ public class Logger {
             newBaseFields.add(i, baseFields.get(i));
         }
 
-        return new Logger(handlers, newBaseFields);
+
+
+        return new Logger(handlers, newBaseFields.toArray(new LogField[0]));
     }
 
     /**
@@ -97,9 +99,9 @@ public class Logger {
         switch(level) {
             case DEBUG:
                 return "DEBUG";
-            case INFO: 
+            case INFO:
                 return "INFO";
-            case WARNING: 
+            case WARNING:
                 return "WARNING";
             case ERROR:
                 return "ERROR";
