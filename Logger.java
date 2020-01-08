@@ -1,6 +1,5 @@
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Map;
 
 public class Logger {
     public ArrayList<LogField> baseFields;
@@ -113,13 +112,73 @@ public class Logger {
     public static void main(String args[]) {
         // Example with base fields
         Logger logger = new Logger(new LogHandler[] {
-            new StdoutHandler()
+            new StdoutHandler(), new JSONHandler("RobotLog1.log")
         }, new LogField("Robot", "Competition"), new LogField("Team", 2175));
 
         // Example without base fields
         // Logger logger = new Logger(new LogHandler[] {
-        //     new StdoutHandler()
+        //     new StdoutHandler(), new JSONHandler()
         // });
-        logger.info("Test log", new LogField("GryoAngle", 22.2), new LogField("LeftEncoder", 400));
+        // logger.info("Test log", new LogField("GryoAngle", 22.2), new LogField("LeftEncoder", 400));
+
+        // SpacetimeEvent parentA = new SpacetimeEvent("Auto1Parent", logger);
+
+        // SpacetimeEvent childOfA1 = parentA.makeChild("Auto1Child1");
+        // SpacetimeEvent childOfA2 = parentA.makeChild("Auto1Child2");
+        // SpacetimeEvent childOfChildOfA2 = childOfA2.makeChild("Auto1Child2Child1");
+        // parentA.start();
+        // childOfA1.start();
+        // childOfA1.end();
+        // childOfA2.start();
+        // childOfChildOfA2.start();
+        // childOfChildOfA2.end();
+        // childOfA2.end();
+        // parentA.end();
+        
+        
+        // SpacetimeEvent parentB = new SpacetimeEvent("Auto2Parent", logger);
+        // SpacetimeEvent parentC = new SpacetimeEvent("Auto3Parent", logger);
+        // parentA.start();
+        // parentB.start();
+        // parentB.end();
+        // parentA.end();
+        // parentC.start();
+        // parentC.end();
+        
+        SpacetimeEvent a = new SpacetimeEvent("A", logger);
+        SpacetimeEvent f = new SpacetimeEvent("F", logger);
+        SpacetimeEvent g = new SpacetimeEvent("G", logger);
+        SpacetimeEvent b = a.makeChild("B");
+        SpacetimeEvent c = b.makeChild("C");
+        SpacetimeEvent d = b.makeChild("D");
+        SpacetimeEvent e = c.makeChild("E");
+        SpacetimeEvent h = g.makeChild("H");
+        a.start();
+        b.start();
+        c.start();
+        d.start();
+        e.start();
+        e.end();
+        c.end();
+        f.start();
+        d.end();
+        b.end();
+        a.end();
+        g.start();
+        h.start();
+        f.end();
+        h.end();
+        g.end();
+        
+        logger.info("Talon1 Data", new LogField("data/talon1/Output", 0.84), new LogField("data/talon1/CurrentDraw", 5));
+        logger.info("Talon1 Data", new LogField("data/talon1/Output", 0.25), new LogField("data/talon1/CurrentDraw", 1.7));
+        logger.info("Talon1 Data", new LogField("data/talon1/Output", 0.5), new LogField("data/talon1/CurrentDraw", 3));
+        logger.info("Talon1 Data", new LogField("data/talon1/Output", 0.35), new LogField("data/talon1/CurrentDraw", 7));
+
+        logger.info("Talon2 Data", new LogField("data/talon2/Output", 0.94), new LogField("data/talon2/CurrentDraw", 0.5));
+        logger.info("Talon2 Data", new LogField("data/talon2/Output", 0.75), new LogField("data/talon2/CurrentDraw", 2.3));
+        logger.info("Talon2 Data", new LogField("data/talon2/Output", 0.5), new LogField("data/talon2/CurrentDraw", 6));
+        logger.info("Talon2 Data", new LogField("data/talon2/Output", 0.1), new LogField("data/talon2/CurrentDraw", 9));
+        
     }
 }

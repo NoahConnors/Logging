@@ -1,3 +1,3 @@
 public interface LogHandler {
-    public void handleLogMessage(LogMessage message);
+    public void handleLogMessage(LogMessage logMessage);
 }
